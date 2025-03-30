@@ -1,0 +1,31 @@
+# main
+library: library.db
+directory: \\10.0.10.63\main\Media\Music\Music
+statefile: state.pickle
+
+# plugins
+plugins: the filetote inline
+pluginpath: []
+
+# tagging
+paths:
+  default: %the{$albumartist}\$album - [$original_year] [$catalognum] [%if{$digital,Web,$media}-$format] [${bitdepth}bit]%if{$rerelease, [RE-$year]}\$albumartist - $album - $track - $title
+
+# import
+import:
+  write: yes
+  copy: yes
+  move: no
+  timid: no
+  quiet: no
+
+# filetote
+patterns:
+  artworkdir:
+    - "[sS]cans/"
+
+# inline
+inline:
+  album_fields:
+      rerelease: 1 if $year > $original_year else 0
+      digital: 1 if $media == 'Digital Media' else 0
